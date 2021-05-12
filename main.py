@@ -180,15 +180,18 @@ def sum(*args):
         s += n
     return s
 
-print(sum(1,2,3,4,5))
 
-def print_vector(x,y,z):
+print(sum(1, 2, 3, 4, 5))
+
+
+def print_vector(x, y, z):
     print('<%s, %s, %s>' % (x, y, z))
 
-print_vector(1,2,3)
-l = [11,2,3]
-t = (1,22,33)
-genexpr = (x*x for x in range(2,7))
+
+print_vector(1, 2, 3)
+l = [11, 2, 3]
+t = (1, 22, 33)
+genexpr = (x * x for x in range(2, 7))
 dict_vec = {'y': 0, 'z': 1, 'x': 2}
 
 print_vector(*l)
@@ -201,3 +204,56 @@ print(*genexpr)
 print(*dict_vec)
 print_vector(**dict_vec)
 
+
+class Car:
+    def __init__(self, color, model):
+        self.color = color
+        self.model = model
+
+    def to_string(self):
+        print(self.color, self.model)
+
+
+    def __str__(self):
+        return f'{self.color} {self.model}'
+
+    def __repr__(self):
+        return (f'{self.__class__.__name__}('
+                f'{self.color!r}, {self.model!r})')
+
+    def __repr1__(self):
+        return f'repr: {self.color} {self.model}'
+
+
+c = Car("Зеленый", "Киа")
+c.to_string()
+print(c)
+print(repr(c))
+print(c.__repr__())
+
+import datetime
+
+today = datetime.date.today()
+print(today)
+
+class NameTooShortError(ValueError):
+    pass
+
+def validate(name):
+    if len(name)<10:
+        raise NameTooShortError(name)
+
+#validate("Коля")
+
+import copy
+
+xs = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+ys = list(xs)
+zs = copy.deepcopy(xs)
+xs.append([10,11])
+ys[1][1] = 'dsa'
+xs[0][1] = 'fff'
+
+print(xs)
+print(ys)
+print(zs)
